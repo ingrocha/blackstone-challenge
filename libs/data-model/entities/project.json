@@ -1,0 +1,19 @@
+{
+	"name": "data-model-entities",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/data-model/entities/src",
+	"projectType": "library",
+	"tags": [],
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/data-model/entities",
+				"main": "libs/data-model/entities/src/index.ts",
+				"tsConfig": "libs/data-model/entities/tsconfig.lib.json",
+				"assets": []
+			}
+		}
+	}
+}
