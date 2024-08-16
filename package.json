@@ -1,0 +1,14 @@
+{
+  "name": "@org/source",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {},
+  "private": true,
+  "devDependencies": {
+    "@nx/js": "19.6.0",
+    "@nx/node": "^19.6.0",
+    "@nx/react": "^19.6.0",
+    "@nx/workspace": "19.6.0",
+    "nx": "19.6.0"
+  }
+}
