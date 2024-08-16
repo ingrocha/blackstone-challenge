@@ -1,0 +1,19 @@
+{
+	"name": "data-model-enums",
+	"$schema": "../../../node_modules/nx/schemas/project-schema.json",
+	"sourceRoot": "libs/data-model/enums/src",
+	"projectType": "library",
+	"tags": [],
+	"targets": {
+		"build": {
+			"executor": "@nx/js:tsc",
+			"outputs": ["{options.outputPath}"],
+			"options": {
+				"outputPath": "dist/libs/data-model/enums",
+				"main": "libs/data-model/enums/src/index.ts",
+				"tsConfig": "libs/data-model/enums/tsconfig.lib.json",
+				"assets": []
+			}
+		}
+	}
+}

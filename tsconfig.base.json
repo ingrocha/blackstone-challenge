@@ -18,6 +18,9 @@
 			"@blackstone-challenge/data-model/entities": [
 				"libs/data-model/entities/src/index.ts"
 			],
+			"@blackstone-challenge/data-model/enums": [
+				"libs/data-model/enums/src/index.ts"
+			],
 			"@blackstone-challenge/data-model/interfaces": [
 				"libs/data-model/interfaces/src/index.ts"
 			]
