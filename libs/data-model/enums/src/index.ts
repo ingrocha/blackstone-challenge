@@ -1,1 +1,1 @@
-export * from './lib/data-model-enums';
+export * from './lib/sharedUsersPermissions.enum';

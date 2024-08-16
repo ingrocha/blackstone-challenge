@@ -1,1 +1,1 @@
-export * from './lib/data-model-interfaces';
+export * from './lib/SharedUsers.interface';

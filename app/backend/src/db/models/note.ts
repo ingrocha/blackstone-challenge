@@ -1,4 +1,6 @@
+import { SharedUsersPermissions } from '@blackstone-challenge/data-model/enums';
 import mongoose from 'mongoose';
+
 const { Schema, model } = mongoose;
 
 const noteSchema = new Schema(
@@ -15,10 +17,13 @@ const noteSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		shared: [
+		sharedUsers: [
 			{
-				user: String,
-				edit: Boolean,
+				username: String,
+				permissions: {
+					type: String,
+					default: SharedUsersPermissions.VIEW,
+				},
 			},
 		],
 	},
