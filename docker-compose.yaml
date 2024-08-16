@@ -1,10 +1,10 @@
 services:
-  db:
-    image: mongo:5
-    restart: always
-    ports:
-      - 27017:27017
-    environment:
-      MONGODB_DATABASE: backstone-challenge
-    volumes:
-      - ./mongo:/data/db
+    db:
+        image: mongo:5
+        restart: always
+        ports:
+            - 27017:27017
+        environment:
+            MONGODB_DATABASE: ${MONGODB_DATABASE}
+        volumes:
+            - ./mongo:/data/db
