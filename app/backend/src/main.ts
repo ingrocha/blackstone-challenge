@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
-
-require('./db/config');
+import dbConnect from './db/config';
 
 // load the environment variables from the .env file
 dotenv.config({
 	path: '.env',
 });
+
+dbConnect();
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;
