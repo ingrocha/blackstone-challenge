@@ -10,10 +10,6 @@ const encryptPassword = async (password) => {
 	return await bcrypt.hash(password, salt);
 };
 
-// const comparePassword = async function comparePassword(password) {
-// 	return await bcrypt.compare(password, this.password);
-// };
-
 export const findById = async (id: string): Promise<User> => {
 	return userMapper(await userService.findById(id));
 };
