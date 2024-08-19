@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import bcrypt from 'bcrypt';
-import { User } from '@blackstone-challenge/data-model/entities';
+
+import { UserOuputDto } from '../../api/user/dto/user.dto';
 
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema<User>(
+const userSchema = new Schema(
 	{
 		name: {
 			type: String,
@@ -23,15 +23,6 @@ const userSchema = new Schema<User>(
 	{ timestamps: true }
 );
 
-userSchema.methods.encryptPassword = async (password) => {
-	const salt = await bcrypt.genSalt(10);
-	return await bcrypt.hash(password, salt);
-};
-
-userSchema.methods.comparePassword = async function comparePassword(password) {
-	return await bcrypt.compare(password, this.password);
-};
-
-const UserModel = model(`User`, userSchema);
+const UserModel = model<UserOuputDto>(`User`, userSchema);
 
 export default UserModel;

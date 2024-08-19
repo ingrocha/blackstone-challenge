@@ -5,4 +5,6 @@ export class Note {
 	content = '';
 	author = '';
 	sharedUsers: SharedUsers[] = [];
+	createdAt?: Date;
+	updatedAt?: Date;
 }

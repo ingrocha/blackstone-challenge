@@ -5,6 +5,6 @@ export class User {
 	name = '';
 	username = '';
 	password? = '';
-	createAt?: Date;
-	updateAt?: Date;
+	createdAt?: Date;
+	updatedAt?: Date;
 }
