@@ -14,6 +14,10 @@ export const findById = async (id: string): Promise<User> => {
 	return userMapper(await userService.findById(id));
 };
 
+export const findAll = async (): Promise<User[]> => {
+	return (await userService.findAll()).map(userMapper);
+};
+
 export const createUser = async (userInputDto: UserInputDto): Promise<User> => {
 	userInputDto.password = await encryptPassword(userInputDto.password);
 	return userMapper(await userService.create(userInputDto));

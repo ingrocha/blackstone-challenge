@@ -5,11 +5,13 @@ import * as userController from './user.constroller';
 import { UserInputDto } from './dto/user.dto';
 import { handleValidationResults } from '../../common/functions/handleValidationResults.fn';
 import { handleRequestErrors } from '../../common/functions/handleRequestErrors.fn';
+import { verifyToken } from '../middlewares/authentication.middleware';
 
 const userRouter = Router();
 
 userRouter.get(
 	'/:id',
+	verifyToken,
 	param('id').isMongoId().withMessage('Not a valid MongoID'),
 	async (req: Request, res: Response) => {
 		try {
@@ -23,8 +25,19 @@ userRouter.get(
 	}
 );
 
+userRouter.get('/', verifyToken, async (req: Request, res: Response) => {
+	try {
+		handleValidationResults(req);
+		const users = await userController.findAll();
+		return res.send(users);
+	} catch (error) {
+		return handleRequestErrors(res, error);
+	}
+});
+
 userRouter.post(
 	'/',
+	verifyToken,
 	body('name').trim().notEmpty().withMessage('is required'),
 	body('username').trim().notEmpty().withMessage('is required').toLowerCase(),
 	body('password')
@@ -48,6 +61,7 @@ userRouter.post(
 
 userRouter.patch(
 	'/:id',
+	verifyToken,
 	param('id').isMongoId().withMessage('Not a valid MongoID'),
 	body('name').trim(),
 	body('username')
@@ -73,6 +87,7 @@ userRouter.patch(
 
 userRouter.patch(
 	'/updatePassword/:id',
+	verifyToken,
 	param('id').isMongoId().withMessage('Not a valid MongoID'),
 	body('password')
 		.notEmpty()
@@ -96,6 +111,7 @@ userRouter.patch(
 
 userRouter.delete(
 	'/:id',
+	verifyToken,
 	param('id').isMongoId().withMessage('Not a valid MongoID'),
 	async (req: Request, res: Response) => {
 		try {

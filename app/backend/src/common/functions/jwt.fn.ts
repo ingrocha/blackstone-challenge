@@ -19,7 +19,7 @@ export const genToken = (user: User): string => {
 
 interface TokenPayload {
 	exp: number;
-	User: User;
+	user: User;
 }
 
 export const validateToken = (token: string): Promise<TokenPayload> => {

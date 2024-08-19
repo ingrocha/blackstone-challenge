@@ -12,6 +12,11 @@ export const findById = async (id: string): Promise<UserOuputDto> => {
 	return user;
 };
 
+export const findAll = async (): Promise<UserOuputDto[]> => {
+	const users = await UserModel.find();
+	return users;
+};
+
 export const create = async (
 	userInputDto: UserInputDto
 ): Promise<UserOuputDto> => {
