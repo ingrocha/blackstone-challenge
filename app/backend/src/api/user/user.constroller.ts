@@ -30,6 +30,14 @@ export const updateUser = async (
 	return userMapper(await userService.update(id, userInputDto));
 };
 
+export const updatePassword = async (
+	id: string,
+	userInputDto: UserInputDto
+): Promise<User> => {
+	userInputDto.password = await encryptPassword(userInputDto.password);
+	return userMapper(await userService.update(id, userInputDto));
+};
+
 export const removeUser = async (id: string): Promise<void> => {
 	return await userService.remove(id);
 };

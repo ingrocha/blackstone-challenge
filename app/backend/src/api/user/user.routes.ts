@@ -49,7 +49,7 @@ userRouter.post(
 userRouter.patch(
 	'/:id',
 	param('id').isMongoId().withMessage('Not a valid MongoID'),
-	body('name').notEmpty().withMessage('is required').trim(),
+	body('name').trim(),
 	body('username')
 		.not()
 		.exists()
@@ -64,6 +64,29 @@ userRouter.patch(
 			const { id } = req.params;
 			const userInputDto: UserInputDto = req.body;
 			const user = await userController.updateUser(id, userInputDto);
+			return res.send(user);
+		} catch (error) {
+			return handleRequestErrors(res, error);
+		}
+	}
+);
+
+userRouter.patch(
+	'/updatePassword/:id',
+	param('id').isMongoId().withMessage('Not a valid MongoID'),
+	body('password')
+		.notEmpty()
+		.withMessage('is required')
+		.isStrongPassword({ minLength: 6, minSymbols: 0 })
+		.withMessage(
+			'must be at least 6 characters long and include at least 1 lowercase letter, 1 uppercase letter, and 1 number.'
+		),
+	async (req: Request, res: Response) => {
+		try {
+			handleValidationResults(req);
+			const { id } = req.params;
+			const { password } = req.body;
+			const user = await userController.updateUser(id, { password });
 			return res.send(user);
 		} catch (error) {
 			return handleRequestErrors(res, error);
