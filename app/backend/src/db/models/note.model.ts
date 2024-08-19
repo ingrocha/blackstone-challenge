@@ -1,23 +1,10 @@
-import { SharedUsersPermissions } from '@blackstone-challenge/data-model/enums';
-import { SharedUsers } from '@blackstone-challenge/data-model/interfaces';
 import mongoose from 'mongoose';
+import { NoteOuputDto } from '../../api/note/dto/note.dto';
+import { SharedUsersPermissions } from '@blackstone-challenge/data-model/enums';
 
 const { Schema, model } = mongoose;
 
-interface NoteAttributes {
-	id: string;
-	title: string;
-	content: string;
-	author: string;
-	sharedUsers: SharedUsers[];
-	createdAt?: Date;
-	updatedAt?: Date;
-}
-
-export type NoteInput = Partial<NoteAttributes>;
-export type NoteOuput = Required<NoteAttributes>;
-
-const noteSchema = new Schema<NoteAttributes>(
+const noteSchema = new Schema(
 	{
 		title: {
 			type: String,
@@ -33,8 +20,8 @@ const noteSchema = new Schema<NoteAttributes>(
 		},
 		sharedUsers: [
 			{
-				username: String,
-				permissions: {
+				username: { type: String, unique: true },
+				permission: {
 					type: String,
 					default: SharedUsersPermissions.VIEW,
 				},
@@ -44,6 +31,6 @@ const noteSchema = new Schema<NoteAttributes>(
 	{ timestamps: true }
 );
 
-const Note = model(`Note`, noteSchema);
+const NoteModel = model<NoteOuputDto>(`Note`, noteSchema);
 
-export default Note;
+export default NoteModel;
