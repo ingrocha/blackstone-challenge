@@ -4,6 +4,7 @@ import * as userController from './user.constroller';
 
 import { UserInputDto } from './dto/user.dto';
 import { handleValidationResults } from '../../common/functions/handleValidationResults.fn';
+import { handleRequestErrors } from '../../common/functions/handleRequestErrors.fn';
 
 const userRouter = Router();
 
@@ -13,32 +14,74 @@ userRouter.get(
 	async (req: Request, res: Response) => {
 		try {
 			handleValidationResults(req);
-			const id = req.params.id;
+			const { id } = req.params;
 			const user = await userController.findById(id);
 			return res.send(user);
 		} catch (error) {
-			return res
-				.status(error.statusCode)
-				.send({ code: error.status, message: error.message });
+			return handleRequestErrors(res, error);
 		}
 	}
 );
 
 userRouter.post(
 	'/',
-	body('name').notEmpty().withMessage('is required').trim(),
-	body('username').notEmpty().withMessage('is required').toLowerCase().trim(),
-	body('password').notEmpty().withMessage('is required'),
+	body('name').trim().notEmpty().withMessage('is required'),
+	body('username').trim().notEmpty().withMessage('is required').toLowerCase(),
+	body('password')
+		.notEmpty()
+		.withMessage('is required')
+		.isStrongPassword({ minLength: 6, minSymbols: 0 })
+		.withMessage(
+			'must be at least 6 characters long and include at least 1 lowercase letter, 1 uppercase letter, and 1 number.'
+		),
 	async (req: Request, res: Response) => {
 		try {
 			handleValidationResults(req);
-			const userInputData: UserInputDto = req.body;
-			const user = await userController.createUser(userInputData);
+			const userInputDto: UserInputDto = req.body;
+			const user = await userController.createUser(userInputDto);
 			return res.send(user);
 		} catch (error) {
-			return res
-				.status(error.statusCode)
-				.send({ code: error.status, message: error.message });
+			return handleRequestErrors(res, error);
+		}
+	}
+);
+
+userRouter.patch(
+	'/:id',
+	param('id').isMongoId().withMessage('Not a valid MongoID'),
+	body('name').notEmpty().withMessage('is required').trim(),
+	body('username')
+		.not()
+		.exists()
+		.withMessage('The request body must not include this field.'),
+	body('password')
+		.not()
+		.exists()
+		.withMessage('The request body must not include this field.'),
+	async (req: Request, res: Response) => {
+		try {
+			handleValidationResults(req);
+			const { id } = req.params;
+			const userInputDto: UserInputDto = req.body;
+			const user = await userController.updateUser(id, userInputDto);
+			return res.send(user);
+		} catch (error) {
+			return handleRequestErrors(res, error);
+		}
+	}
+);
+
+userRouter.delete(
+	'/:id',
+	param('id').isMongoId().withMessage('Not a valid MongoID'),
+	async (req: Request, res: Response) => {
+		try {
+			handleValidationResults(req);
+			const { id } = req.params;
+			await userController.removeUser(id);
+			return res.send();
+		} catch (error) {
+			return handleRequestErrors(res, error);
 		}
 	}
 );

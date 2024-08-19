@@ -10,15 +10,26 @@ const encryptPassword = async (password) => {
 	return await bcrypt.hash(password, salt);
 };
 
-const comparePassword = async function comparePassword(password) {
-	return await bcrypt.compare(password, this.password);
-};
+// const comparePassword = async function comparePassword(password) {
+// 	return await bcrypt.compare(password, this.password);
+// };
 
 export const findById = async (id: string): Promise<User> => {
-	return userMapper(await userService.userById(id));
+	return userMapper(await userService.findById(id));
 };
 
-export const createUser = async (user: UserInputDto): Promise<User> => {
-	user.password = await encryptPassword(user.password);
-	return userMapper(await userService.createUser(user));
+export const createUser = async (userInputDto: UserInputDto): Promise<User> => {
+	userInputDto.password = await encryptPassword(userInputDto.password);
+	return userMapper(await userService.create(userInputDto));
+};
+
+export const updateUser = async (
+	id: string,
+	userInputDto: UserInputDto
+): Promise<User> => {
+	return userMapper(await userService.update(id, userInputDto));
+};
+
+export const removeUser = async (id: string): Promise<void> => {
+	return await userService.remove(id);
 };

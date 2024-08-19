@@ -1,20 +1,9 @@
 import createHttpError from 'http-errors';
 import UserModel from '../../db/models/user.model';
 import { UserInputDto, UserOuputDto } from './dto/user.dto';
+import { handleMongooseExceptions } from '../../common/functions/handleMongooseExceptions.fn';
 
-const handleExceptions = (error) => {
-	if (error.code === 11000) {
-		throw new createHttpError.BadRequest(
-			`User exists in db ${JSON.stringify(error.keyValue)}`
-		);
-	}
-	console.log(error);
-	throw new createHttpError.InternalServerError(
-		`Can't create user - check servers logs`
-	);
-};
-
-export const userById = async (id: string): Promise<UserOuputDto> => {
+export const findById = async (id: string): Promise<UserOuputDto> => {
 	const user = await UserModel.findById<UserOuputDto>(id);
 
 	if (!user)
@@ -23,11 +12,42 @@ export const userById = async (id: string): Promise<UserOuputDto> => {
 	return user;
 };
 
-export const createUser = async (user: UserInputDto): Promise<UserOuputDto> => {
+export const create = async (
+	userInputDto: UserInputDto
+): Promise<UserOuputDto> => {
 	try {
-		const userNewObject = new UserModel(user);
-		return await userNewObject.save();
+		const user = new UserModel(userInputDto);
+		return await user.save();
 	} catch (error) {
-		handleExceptions(error);
+		handleMongooseExceptions(error, 'User');
 	}
 };
+
+export const update = async (
+	id: string,
+	userInputDto: UserInputDto
+): Promise<UserOuputDto> => {
+	try {
+		const user = await findById(id);
+
+		await user.updateOne(userInputDto);
+
+		return { ...user.toJSON(), ...userInputDto };
+	} catch (error) {
+		handleMongooseExceptions(error, 'User');
+	}
+};
+export async function remove(id: string): Promise<void> {
+	try {
+		const { deletedCount } = await UserModel.deleteOne({ _id: id });
+
+		if (deletedCount === 0)
+			throw new createHttpError.NotFound(
+				`Pokemon with id ${id} does not exist`
+			);
+
+		return;
+	} catch (error) {
+		handleMongooseExceptions(error, 'User');
+	}
+}
