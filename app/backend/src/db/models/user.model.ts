@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import { User } from '@blackstone-challenge/data-model/entities';
 
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema(
+const userSchema = new Schema<User>(
 	{
 		name: {
 			type: String,
@@ -31,6 +32,6 @@ userSchema.methods.comparePassword = async function comparePassword(password) {
 	return await bcrypt.compare(password, this.password);
 };
 
-const User = model(`User`, userSchema);
+const UserModel = model(`User`, userSchema);
 
-export default User;
+export default UserModel;
