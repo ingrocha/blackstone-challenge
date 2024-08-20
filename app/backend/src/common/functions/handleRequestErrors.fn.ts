@@ -15,7 +15,8 @@ import { Response } from 'express';
  * @returns a response with the status code and error message provided in the `error` object.
  */
 export const handleRequestErrors = (res: Response, error) => {
-	return res
-		.status(error.statusCode)
-		.send({ code: error.status, message: error.message });
+	return res.status(error.statusCode).send({
+		statusCode: error.status,
+		message: error.message,
+	});
 };
