@@ -2,7 +2,9 @@ import dotenv from 'dotenv';
 import express from 'express';
 import dbConnect from './db/config';
 import routes from './api/index.routes';
-import userRouter from './api/user/user.routes';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
+import { swaggerOptions } from './documentation/swaggerConfig'; // Adjust the import path
 
 // load the environment variables from the .env file
 dotenv.config({
@@ -18,6 +20,10 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Swagger setup
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.get('/', (req, res) => {
 	return res.status(200).send({
