@@ -2,6 +2,7 @@ import createHttpError from 'http-errors';
 import NoteModel from '../../db/models/note.model';
 import { NoteInputDto, NoteOuputDto } from './dto/note.dto';
 import { handleMongooseExceptions } from '../../common/functions/handleMongooseExceptions.fn';
+import { UpdateHistory } from '@blackstone-challenge/data-model/interfaces';
 
 export const findById = async (id: string): Promise<NoteOuputDto> => {
 	const note = await NoteModel.findById<NoteOuputDto>(id);
@@ -34,15 +35,14 @@ export const findSharedNotes = async (
 	searchTerm?: string
 ): Promise<NoteOuputDto[]> => {
 	const queryParams = {};
-	queryParams['author'] = username;
+	queryParams['sharedUsers.username'] = username;
 	if (searchTerm)
 		queryParams['$or'] = [
 			{ title: { $regex: '.*' + searchTerm + '.*' } },
 			{ content: { $regex: '.*' + searchTerm + '.*' } },
 		];
-	const sharedNotes: NoteOuputDto[] = await NoteModel.find({
-		'sharedUsers.username': username,
-		$or: [{ title: `/${searchTerm}/` }, { content: `/${searchTerm}/` }],
+	const sharedNotes: NoteOuputDto[] = await NoteModel.find(queryParams).sort({
+		createdAt: -1,
 	});
 
 	return sharedNotes;
@@ -65,6 +65,13 @@ export const update = async (
 ): Promise<NoteOuputDto> => {
 	try {
 		const note = await findById(id);
+
+		const updateHistory: UpdateHistory = {
+			content: note.content,
+			updatedBy: note.updatedBy,
+		};
+		noteInputDto.updateHistory = note.updateHistory;
+		noteInputDto.updateHistory.unshift(updateHistory);
 
 		await note.updateOne(noteInputDto);
 
