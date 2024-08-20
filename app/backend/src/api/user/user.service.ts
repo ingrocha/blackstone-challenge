@@ -13,7 +13,7 @@ export const findById = async (id: string): Promise<UserOuputDto> => {
 };
 
 export const findAll = async (): Promise<UserOuputDto[]> => {
-	const users = await UserModel.find();
+	const users: UserOuputDto[] = await UserModel.find();
 	return users;
 };
 
@@ -48,7 +48,7 @@ export async function remove(id: string): Promise<void> {
 
 		if (deletedCount === 0)
 			throw new createHttpError.NotFound(
-				`Pokemon with id ${id} does not exist`
+				`User with id ${id} does not exist`
 			);
 
 		return;
