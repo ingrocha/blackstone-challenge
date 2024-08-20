@@ -18,9 +18,17 @@ const noteSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		updatedBy: String,
+		updateHistory: [
+			{
+				updatedBy: String,
+				updatedAt: { type: Date, default: Date.now },
+				content: String,
+			},
+		],
 		sharedUsers: [
 			{
-				username: { type: String, unique: true },
+				username: { type: String },
 				permission: {
 					type: String,
 					default: SharedUsersPermissions.VIEW,
@@ -30,7 +38,6 @@ const noteSchema = new Schema(
 	},
 	{ timestamps: true }
 );
-
 const NoteModel = model<NoteOuputDto>(`Note`, noteSchema);
 
 export default NoteModel;
