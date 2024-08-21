@@ -2,9 +2,7 @@ import express, { Application } from 'express';
 import routes from './api/index.routes';
 import dotenv from 'dotenv';
 
-dotenv.config({
-	path: '.env',
-});
+dotenv.config();
 
 const host = process.env.HOST ?? 'localhost';
 const port = process.env.PORT ? Number(process.env.PORT) : 3000;

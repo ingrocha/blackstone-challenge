@@ -23,5 +23,3 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.listen(port, host, async () => {
 	console.log(`[ ready ] http://${host}:${port}`);
 });
-
-export { app };

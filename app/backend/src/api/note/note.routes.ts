@@ -167,7 +167,6 @@ noteRouter.get(
 				searchTerm: string;
 			};
 			const { user } = req.body as { user: User };
-			console.warn('🐉 Charles ~ user:', user);
 			const notes = await noteController.findSharedNotes(
 				user.username,
 				searchTerm
@@ -390,9 +389,7 @@ noteRouter.post(
 			const { user } = req.body as {
 				user: User;
 			};
-			const noteInputDto = plainToInstance(Note, req.body, {
-				excludeExtraneousValues: true,
-			});
+			const noteInputDto = req.body;
 			delete noteInputDto.id;
 			noteInputDto.author = user.username;
 			const note = await noteController.createNote(noteInputDto);
