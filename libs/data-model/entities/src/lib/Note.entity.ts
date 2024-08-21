@@ -18,7 +18,7 @@ export class Note {
 
 	updatedBy = '';
 
-	updateHistory: UpdateHistory[] = [];
+	updateHistories: UpdateHistory[] = [];
 
 	@Expose()
 	sharedUsers: SharedUsers[] = [];

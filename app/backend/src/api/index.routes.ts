@@ -29,7 +29,21 @@ const router = Router();
 
 router.use('/user', userRouter);
 
+/**
+ * @swagger
+ * tags:
+ *   - name: Login
+ *     description: API endpoints related to Login
+ */
+
 router.use('/login', loginRouter);
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Note
+ *     description: API endpoints related to Note
+ */
 
 router.use('/note', noteRouter);
 

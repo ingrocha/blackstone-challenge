@@ -70,8 +70,8 @@ export const update = async (
 			content: note.content,
 			updatedBy: note.updatedBy,
 		};
-		noteInputDto.updateHistory = note.updateHistory;
-		noteInputDto.updateHistory.unshift(updateHistory);
+		noteInputDto.updateHistories = note.updateHistories;
+		noteInputDto.updateHistories.unshift(updateHistory);
 
 		await note.updateOne(noteInputDto);
 

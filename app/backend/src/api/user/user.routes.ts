@@ -28,30 +28,33 @@ const userRouter = Router();
  *         id:
  *           type: string
  *           description: The auto-generated id of the user
+ *           readOnly: true
+ *           example: d5fE_asz
  *         name:
  *           type: string
  *           description: The name of the user
+ *           example: Admin
  *         username:
  *           type: string
  *           description: The username of the user
+ *           example: admin
  *         password:
  *           type: string
  *           writeOnly: true
- *           description: The password of the user, this data is encrypted
+ *           description: The password of the user. Must be at least 6 characters long and include at least 1 lowercase letter, 1 uppercase letter, and 1 number.
+ *           example: ThisJustT3st
  *         createdAt:
  *           type: string
  *           format: date-time
+ *           readOnly: true
  *           description: The date the user was created
+ *           example: 2023-01-01T00:00:00.000Z
  *         updatedAt:
  *           type: string
  *           format: date-time
+ *           readOnly: true
  *           description: The date the user was last updated
- *       example:
- *         id: d5fE_asz
- *         name: Admin
- *         username: admin
- *         createdAt: 2023-01-01T00:00:00.000Z
- *         updatedAt: 2023-01-02T00:00:00.000Z
+ *           example: 2023-01-01T00:00:00.000Z
  */
 
 /**
@@ -180,22 +183,7 @@ userRouter.get('/', verifyToken, async (req: Request, res: Response) => {
  *       content:
  *         application/json:
  *           schema:
- *             type: object
- *             required:
- *               - name
- *               - username
- *               - password
- *             properties:
- *               name:
- *                 type: string
- *                 example: "John Doe"
- *               username:
- *                 type: string
- *                 example: "johndoe"
- *               password:
- *                 type: string
- *                 example: "Password123"
- *                 description: "Must be at least 6 characters long and include at least 1 lowercase letter, 1 uppercase letter, and 1 number."
+ *             $ref: '#components/schemas/User'
  *     responses:
  *       200:
  *         description: User created successfully

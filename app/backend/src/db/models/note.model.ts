@@ -19,7 +19,7 @@ const noteSchema = new Schema(
 			required: true,
 		},
 		updatedBy: String,
-		updateHistory: [
+		updateHistories: [
 			{
 				updatedBy: String,
 				updatedAt: { type: Date, default: Date.now },

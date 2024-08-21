@@ -18,6 +18,7 @@ export const swaggerOptions: SwaggerOptions = {
 	apis: [
 		'app/backend/src/api/index.routes.ts',
 		'app/backend/src/api/user/user.routes.ts',
+		'app/backend/src/api/note/note.routes.ts',
 	], // Path to your API route files
 };
 // app/backend/src/documentation/swaggerConfig.ts

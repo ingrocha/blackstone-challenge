@@ -8,7 +8,7 @@ export const noteMapper = (note: NoteOuputDto): Note => {
 		content: note.content,
 		author: note.author,
 		updatedBy: note.updatedBy,
-		updateHistory: note.updateHistory,
+		updateHistories: note.updateHistories,
 		sharedUsers: note.sharedUsers,
 		createdAt: note.createdAt,
 		updatedAt: note.updatedAt,
