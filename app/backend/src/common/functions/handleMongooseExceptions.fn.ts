@@ -1,5 +1,13 @@
 import createHttpError from 'http-errors';
 
+/**
+ * Handles Mongoose exceptions.
+ *
+ * @param error - The error object thrown by Mongoose.
+ * @param model - The name of the model associated with the error.
+ * @throws {createHttpError.BadRequest} - If a duplicate user is detected in sharedUsers, or if the model already exists in the database.
+ * @throws {createHttpError.InternalServerError} - If an error occurs while creating the user.
+ */
 export const handleMongooseExceptions = (error, model: string) => {
 	if (error.code === 11000) {
 		const keyValue = JSON.stringify(error.keyValue);

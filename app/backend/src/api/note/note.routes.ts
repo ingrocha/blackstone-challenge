@@ -398,7 +398,6 @@ noteRouter.post(
 			const note = await noteController.createNote(noteInputDto);
 			return res.send(note);
 		} catch (error) {
-			console.error(error);
 			return handleRequestErrors(res, error);
 		}
 	}
@@ -501,7 +500,6 @@ noteRouter.patch(
 			const note = await noteController.updateNote(id, noteInputDto);
 			return res.send(note);
 		} catch (error) {
-			console.error(error);
 			return handleRequestErrors(res, error);
 		}
 	}
