@@ -1,14 +1,23 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const connectionString = process.env.MONGODB_STRING;
+dotenv.config();
+
+const mongoDburi = process.env.MONGODB_DBURI || '';
+let mongoDbname = process.env.MONGODB_DBNAME || '';
 
 // Function to establish a connection to the MongoDB database using Mongoose
 const dbConnect = async () => {
 	try {
-		const db = await mongoose.connect(connectionString);
+		if (process.env.NODE_ENV === 'test') mongoDbname += '-test';
+		const db = await mongoose.connect(mongoDburi, {
+			dbName: mongoDbname,
+			autoCreate: true,
+		});
 		console.log('Connected to ', db.connection.name);
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
@@ -21,5 +30,13 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('disconnected', () => {
 	console.log('Mongoose is disconnected');
 });
+
+export async function dbDisconnect() {
+	try {
+		await mongoose.connection.close();
+	} catch (error) {
+		console.log('DB disconnect error');
+	}
+}
 
 export default dbConnect;

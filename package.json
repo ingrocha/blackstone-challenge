@@ -6,6 +6,7 @@
 		"start:db:docker": "docker compose up -d",
 		"restart:db:docker": "docker compose restart",
 		"stop:db:docker": "docker compose down",
+		"test:backend": "nx test --project app-backend",
 		"serve:backend": "nx serve --project app-backend",
 		"build:backend": "nx serve --project app-backend"
 	},
@@ -53,6 +54,7 @@
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.5.3",
 		"reflect-metadata": "^0.2.2",
+		"supertest": "^7.0.0",
 		"swagger-jsdoc": "^6.2.8",
 		"swagger-ui-express": "^5.0.1",
 		"tslib": "^2.3.0"
