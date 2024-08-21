@@ -11,7 +11,7 @@ export const swaggerOptions: SwaggerOptions = {
 		},
 		servers: [
 			{
-				url: 'http://localhost:3000',
+				url: 'http://localhost:3000/',
 			},
 		],
 	},
@@ -19,6 +19,7 @@ export const swaggerOptions: SwaggerOptions = {
 		'app/backend/src/api/index.routes.ts',
 		'app/backend/src/api/user/user.routes.ts',
 		'app/backend/src/api/note/note.routes.ts',
+		'app/backend/src/api/login/login.router.ts',
 	], // Path to your API route files
 };
 // app/backend/src/documentation/swaggerConfig.ts

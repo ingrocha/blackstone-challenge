@@ -12,11 +12,7 @@ const userRouter = Router();
 /**
  * @swagger
  * components:
- *   securitySchemes:
- *     BearerAuth:
- *       type: http
- *       scheme: bearer
- *       bearerFormat: JWT
+
  *   schemas:
  *     User:
  *       type: object
@@ -59,7 +55,7 @@ const userRouter = Router();
 
 /**
  * @swagger
- * api/v1/user/{id}:
+ * /api/v1/user/{id}:
  *   get:
  *     summary: Get the user by id
  *     tags:
@@ -170,13 +166,11 @@ userRouter.get('/', verifyToken, async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * api/v1/user:
+ * /api/v1/user:
  *   post:
  *     summary: Create a new user
  *     tags:
  *       - User
- *     security:
- *       - BearerAuth: []
  *     requestBody:
  *       description: Data for creating a new user
  *       required: true
@@ -218,7 +212,6 @@ userRouter.get('/', verifyToken, async (req: Request, res: Response) => {
  */
 userRouter.post(
 	'/',
-	verifyToken,
 	body('name').trim().notEmpty().withMessage('is required'),
 	body('username').trim().notEmpty().withMessage('is required').toLowerCase(),
 	body('password')
