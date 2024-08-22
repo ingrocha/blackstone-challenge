@@ -4,10 +4,10 @@ export const swaggerOptions: SwaggerOptions = {
 	definition: {
 		openapi: '3.0.0',
 		info: {
-			title: 'Express API with TypeScript',
+			title: 'Blackstone Challenge API',
 			version: '1.0.0',
 			description:
-				'This is a REST API application made with Express and TypeScript',
+				'This is Blackstone Challenge REST API application made with Express and TypeScript',
 		},
 		servers: [
 			{

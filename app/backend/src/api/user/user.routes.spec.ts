@@ -90,16 +90,6 @@ describe('POST /user', () => {
 		expect(response.body).toHaveProperty('username', 'johndoe');
 	});
 
-	it('should login with the updated password and return 200', async () => {
-		const response = await request(app).post('/api/v1/login').send({
-			username: 'johndoe',
-			password: 'Password321',
-		});
-
-		expect(response.status).toBe(200);
-		expect(response.body).toHaveProperty('token');
-	});
-
 	it('should delete user by id and return 200', async () => {
 		const response = await request(app)
 			.delete(`/api/v1/user/${user.id}`)

@@ -27,28 +27,34 @@ _Note: Make sure you have installed docker on your computer._
 Start container:
 
 ```bash
-npm run start:db:docker"
+npm run start:db:docker
 ```
 
 Restart container:
 
 ```bash
-npm run restar:db:docker"
+npm run restar:db:docker
 ```
 
 Stop container:
 
 ```bash
-npm run stop:db:docker"
+npm run stop:db:docker
 ```
 
-## 5. Start the backend
+## 5. Run backend Tests
+
+```bash
+npm run test:backend
+```
+
+## 6. Start the backend
 
 ```bash
 npm run serve:backend
 ```
 
-## 6. API Documentation
+## 7. API Documentation
 
 Once the backend is available you can access the documentation consuming the next url in your browser
 
@@ -56,7 +62,7 @@ Once the backend is available you can access the documentation consuming the nex
 http://localhost:3000/api-docs
 ```
 
-## 7. Start the frontend
+## 8. Start the frontend
 
 ```bash
 npm run serve:frontend
