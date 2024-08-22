@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
-import { validateToken } from '../../common/functions/jwt.fn';
+import { TokenPayload, validateToken } from '../../common/functions/jwt.fn';
 import { handleRequestErrors } from '../../common/functions/handleRequestErrors.fn';
 
 const getBearerAuthenticationToken = (req: Request): string => {
@@ -21,20 +21,7 @@ export const verifyToken = async (
 ) => {
 	try {
 		const jwt = getBearerAuthenticationToken(req);
-		await validateToken(jwt)
-			.then((token) => {
-				req.body.user = token.user;
-			})
-			.catch((error) => {
-				if (error.name === 'TokenExpiredError')
-					throw new createHttpError.Unauthorized('Token expired');
-
-				console.error(error);
-				throw new createHttpError.InternalServerError(
-					'Authentication token failed'
-				);
-			});
-
+		await validateToken(jwt);
 		next();
 	} catch (error) {
 		handleRequestErrors(res, error);
