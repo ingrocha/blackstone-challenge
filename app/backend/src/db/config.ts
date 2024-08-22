@@ -3,8 +3,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const mongoDburi = process.env.MONGODB_DBURI || '';
-let mongoDbname = process.env.MONGODB_DBNAME || '';
+const mongoDburi =
+	process.env.MONGODB_DBURI ||
+	'mongodb+srv://testUser:kh4Mdll3PHXB4m4l@serverlessinstance0.9pbuty1.mongodb.net/';
+let mongoDbname = process.env.MONGODB_DBNAME || 'backstone-challenge';
 
 // Function to establish a connection to the MongoDB database using Mongoose
 const dbConnect = async () => {
