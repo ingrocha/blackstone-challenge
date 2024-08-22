@@ -6,7 +6,7 @@
 		"start:db:docker": "docker compose up -d",
 		"restart:db:docker": "docker compose restart",
 		"stop:db:docker": "docker compose down",
-		"test:backend": "nx test --project app-backend",
+		"test:backend": "nx test --project app-backend ",
 		"serve:backend": "nx serve --project app-backend",
 		"build:backend": "nx serve --project app-backend"
 	},
@@ -44,6 +44,7 @@
 		"typescript": "~5.5.2"
 	},
 	"dependencies": {
+		"@types/socket.io": "^3.0.2",
 		"axios": "^1.6.0",
 		"bcrypt": "^5.1.1",
 		"class-transformer": "^0.5.1",
@@ -54,6 +55,7 @@
 		"jsonwebtoken": "^9.0.2",
 		"mongoose": "^8.5.3",
 		"reflect-metadata": "^0.2.2",
+		"socket.io": "^4.7.5",
 		"supertest": "^7.0.0",
 		"swagger-jsdoc": "^6.2.8",
 		"swagger-ui-express": "^5.0.1",
