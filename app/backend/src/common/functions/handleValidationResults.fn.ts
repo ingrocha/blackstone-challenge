@@ -1,10 +1,10 @@
 import { Request } from 'express';
-import { FieldValidationError, validationResult } from 'express-validator';
+import { ValidationError, validationResult } from 'express-validator';
 import createHttpError from 'http-errors';
 
-const errorFormatter = (error: FieldValidationError) => {
+const errorFormatter = (error: ValidationError) => {
 	// Build your resulting errors however you want! String, object, whatever - it works!
-	return `${error.location}[${error.path}]: ${error.msg}`;
+	return `${error.location}[${error.param}]: ${error.msg}`;
 };
 
 /**
