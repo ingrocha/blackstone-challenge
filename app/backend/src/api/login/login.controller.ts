@@ -20,7 +20,7 @@ export const checkLogin = async (
 ): Promise<LoginResponse> => {
 	const userOuputDto = await loginService.findByUsername(username);
 
-	if (!comparePassword(password, userOuputDto))
+	if (!(await comparePassword(password, userOuputDto)))
 		throw new createHttpError.Unauthorized(
 			'Username or password is incorrect'
 		);
