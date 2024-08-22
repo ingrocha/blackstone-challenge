@@ -118,6 +118,11 @@ const noteRouter = Router();
  *       - BearerAuth: []
  *     parameters:
  *       - in: query
+ *         name: username
+ *         type: string
+ *         required: true
+ *         description: The value used to get all the shared notes with the user.
+ *       - in: query
  *         name: searchTerm
  *         type: string
  *         description: The value used to search in the notes by title or content.
@@ -159,16 +164,16 @@ const noteRouter = Router();
 noteRouter.get(
 	'/sharedNotes',
 	verifyToken,
-	query('searchTerm').trim(),
+	query('username').notEmpty().withMessage('is required'),
 	async (req: Request, res: Response) => {
 		try {
 			handleValidationResults(req);
-			const { searchTerm } = req.query as {
+			const { username, searchTerm } = req.query as {
+				username: string;
 				searchTerm: string;
 			};
-			const { user } = req.body as { user: User };
 			const notes = await noteController.findSharedNotes(
-				user.username,
+				username,
 				searchTerm
 			);
 			return res.send(notes);
@@ -253,6 +258,11 @@ noteRouter.get(
  *       - BearerAuth: []
  *     parameters:
  *       - in: query
+ *         name: username
+ *         type: string
+ *         required: true
+ *         description: The value used to get all the shared notes with the user.
+ *       - in: query
  *         name: searchTerm
  *         type: string
  *         example: title
@@ -295,18 +305,16 @@ noteRouter.get(
 noteRouter.get(
 	'/',
 	verifyToken,
-	query('searchTerm').trim(),
+	query('username').notEmpty().withMessage('is required'),
 	async (req: Request, res: Response) => {
 		try {
 			handleValidationResults(req);
-			const { searchTerm } = req.query as {
+			const { username, searchTerm } = req.query as {
+				username: string;
 				searchTerm: string;
 			};
-			const { user } = req.body as { user: User };
-			const notes = await noteController.findAll(
-				user.username,
-				searchTerm
-			);
+
+			const notes = await noteController.findAll(username, searchTerm);
 			return res.send(notes);
 		} catch (error) {
 			return handleRequestErrors(res, error);
@@ -385,13 +393,7 @@ noteRouter.post(
 	async (req: Request, res: Response) => {
 		try {
 			handleValidationResults(req);
-
-			const { user } = req.body as {
-				user: User;
-			};
-			const noteInputDto = req.body;
-			delete noteInputDto.id;
-			noteInputDto.author = user.username;
+			const noteInputDto = req.body as Note;
 			const note = await noteController.createNote(noteInputDto);
 			return res.send(note);
 		} catch (error) {
