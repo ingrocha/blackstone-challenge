@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import createHttpError from 'http-errors';
-import { TokenPayload, validateToken } from '../../common/functions/jwt.fn';
+import { validateToken } from '../../common/functions/jwt.fn';
 import { handleRequestErrors } from '../../common/functions/handleRequestErrors.fn';
 
 const getBearerAuthenticationToken = (req: Request): string => {
