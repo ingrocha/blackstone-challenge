@@ -3,6 +3,7 @@ import NoteModel from '../../db/models/note.model';
 import { NoteInputDto, NoteOuputDto } from './dto/note.dto';
 import { handleMongooseExceptions } from '../../common/functions/handleMongooseExceptions.fn';
 import { UpdateHistory } from '@blackstone-challenge/data-model/interfaces';
+import { User } from '@blackstone-challenge/data-model/entities';
 
 export const findById = async (id: string): Promise<NoteOuputDto> => {
 	const note = await NoteModel.findById<NoteOuputDto>(id);
