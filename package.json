@@ -8,7 +8,7 @@
 		"stop:db:docker": "docker compose down",
 		"test:backend": "nx test --project app-backend ",
 		"serve:backend": "nx serve --project app-backend",
-		"build:backend": "nx build --project app-backend"
+		"build:backend": "nx build --project app-backend --prod"
 	},
 	"private": true,
 	"devDependencies": {
