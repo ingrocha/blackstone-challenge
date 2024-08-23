@@ -1,9 +1,6 @@
-name: Backend Deployment
+name: manual-deploy-backend
 
-on:
-    push:
-        branches:
-            - main
+on: workflow_dispatch
 
 jobs:
     deploy:
@@ -11,10 +8,10 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
                   node-version: 18
 
@@ -23,17 +20,15 @@ jobs:
 
             - name: Run tests
               run: npm run test:backend
+              env:
+                  TOKEN_SECRET_KEY: your-secret-key-here
+                  TOKEN_EXPIRES: 2 days
 
-            - name: Build backend
-              run: npm run build:backend
-
-            - name: Install railways cli
-              run: npm install -g @railways/cli
-
-            # - name: Deploy to Railways
-            #   run: railways deploy --env production --app my-app --path ./dist/app/backend
+            - name: Install railway cli
+              run: npm install -g @railway/cli
 
             - name: Deploy to Railways
-              run: RAILWAYS_TOKEN=$RAILWAYS_TOKEN railways up
+              run: RAILWAY_TOKEN=$RAILWAY_TOKEN railway up  --service=$RAILWAY_SERVICE_NAME -d
               env:
-                  RAILWAYS_TOKEN: ${{ secrets.RAILWAYS_BACKEND_TOKEN }}
+                  RAILWAY_TOKEN: ${{ secrets.RAILWAY_BACKEND_TOKEN }}
+                  RAILWAY_SERVICE_NAME: ${{ secrets.RAILWAY_BACKEND_SERVICE_NAME}}
