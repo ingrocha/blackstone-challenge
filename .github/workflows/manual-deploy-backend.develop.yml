@@ -33,5 +33,5 @@ jobs:
             - name: Deploy to Railways
               run: RAILWAY_TOKEN=$RAILWAY_TOKEN railway up  --service=$RAILWAY_SERVICE_NAME -d
               env:
-                  RAILWAY_TOKEN: ${{ secrets.RAILWAYS_BACKEND_TOKEN }}
+                  RAILWAY_TOKEN: ${{ secrets.RAILWAY_BACKEND_TOKEN }}
                   RAILWAY_SERVICE_NAME: ${{ secrets.RAILWAY_BACKEND_SERVICE_NAME}}
