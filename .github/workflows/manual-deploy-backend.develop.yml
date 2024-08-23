@@ -24,9 +24,6 @@ jobs:
                   TOKEN_SECRET_KEY: your-secret-key-here
                   TOKEN_EXPIRES: 2 days
 
-            - name: Build backend
-              run: npm run build:backend:prod
-
             - name: Install railway cli
               run: npm install -g @railway/cli
 
