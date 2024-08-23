@@ -8,21 +8,24 @@ jobs:
 
         steps:
             - name: Checkout code
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: Set up Node.js
-              uses: actions/setup-node@v2
+              uses: actions/setup-node@v3
               with:
-                  node-version: 20
+                  node-version: 18
 
             - name: Install dependencies
               run: npm install
 
-            - name: Build backend
-              run: npm run build:backend
-
             - name: Run tests
               run: npm run test:backend
+              env:
+                  TOKEN_SECRET_KEY: your-secret-key-here
+                  TOKEN_EXPIRES: 2 days
+
+            - name: Build backend
+              run: npm run build:backend
 
             - name: Install railways cli
               run: npm install -g @railways/cli
