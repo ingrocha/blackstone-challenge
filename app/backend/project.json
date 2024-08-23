@@ -11,10 +11,10 @@
 			"defaultConfiguration": "production",
 			"options": {
 				"platform": "node",
-				"outputPath": "public",
+				"outputPath": "dist/app/backend",
 				"format": ["cjs"],
 				"bundle": false,
-				"main": "app/backend/src/index.ts",
+				"main": "app/backend/src/main.ts",
 				"tsConfig": "app/backend/tsconfig.app.json",
 				"assets": ["app/backend/src/assets"],
 				"generatePackageJson": true,
