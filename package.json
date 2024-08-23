@@ -7,8 +7,10 @@
 		"restart:db:docker": "docker compose restart",
 		"stop:db:docker": "docker compose down",
 		"test:backend": "nx test --project app-backend ",
-		"serve:backend": "nx serve --project app-backend",
-		"build:backend": "nx build --project app-backend --prod"
+		"serve:backend:develop": "npx nx run app-backend:serve:develop",
+		"serve:backend:prod": "npx nx run app-backend:serve:production",
+		"build:backend:develop": "nx run app-backend:build:development",
+		"build:backend:prod": "nx run app-backend:build:production"
 	},
 	"private": true,
 	"devDependencies": {

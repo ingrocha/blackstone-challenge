@@ -34,7 +34,7 @@ jobs:
               run: railways deploy --env production --app my-app --path ./dist/app/backend
 
             - name: Deploy to Railways
-              run: RAILWAY_TOKEN=$RAILWAY_TOKEN railway up ./dist/app/backend --service=$RAILWAY_SERVICE_NAME -d
+              run: RAILWAY_TOKEN=$RAILWAY_TOKEN railway up  --service=$RAILWAY_SERVICE_NAME -d
               env:
                   RAILWAY_TOKEN: ${{ secrets.RAILWAYS_BACKEND_TOKEN }}
                   RAILWAY_SERVICE_NAME: ${{ secrets.RAILWAY_BACKEND_SERVICE_NAME}}
