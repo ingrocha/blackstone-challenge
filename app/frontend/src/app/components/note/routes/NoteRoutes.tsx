@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { NotePage } from '../pages/NotePage';
+import { NotePage } from '../components/NotePage';
 
 export const NoteRoutes = () => {
 	return (
