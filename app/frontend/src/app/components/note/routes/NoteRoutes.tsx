@@ -1,11 +1,11 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { NotePage } from '../components/NotePage';
+import { Route, Routes } from 'react-router-dom';
+import { AddNoteComponent, ListNoteComponent } from '../components';
 
 export const NoteRoutes = () => {
 	return (
 		<Routes>
-			<Route path="notes" element={<NotePage />} />
-			<Route path="/*" element={<Navigate to="/"></Navigate>} />
+			<Route path="list" element={<ListNoteComponent />} />
+			<Route path="add" element={<AddNoteComponent />} />
 		</Routes>
 	);
 };
