@@ -10,9 +10,9 @@ export const AppLayout = ({ children }: { children: ReactNode }) => {
 			<NavBar drawerWidth={drawerWidth}></NavBar>
 			<SideBar drawerWidth={drawerWidth}></SideBar>
 			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+				<Toolbar />
 				{children}
 			</Box>
-			<Toolbar />
 		</Box>
 	);
 };

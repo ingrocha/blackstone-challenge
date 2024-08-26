@@ -1,5 +1,5 @@
 import { Note } from '@blackstone-challenge/data-model/entities';
-import { TableRow, TableCell, Button } from '@mui/material';
+import { TableRow, TableCell, Button, Hidden } from '@mui/material';
 
 export const TableItemNotesView = ({ note }: { note: Note }) => {
 	return (
@@ -7,17 +7,20 @@ export const TableItemNotesView = ({ note }: { note: Note }) => {
 			<TableCell component="th" scope="row">
 				{note.title}
 			</TableCell>
-			<TableCell
-				sx={{
-					whiteSpace: 'nowrap',
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
-					maxWidth: 700,
-				}}
-			>
-				{note.content}
-			</TableCell>
-			<TableCell>{note.updatedAt?.toLocaleDateString()}</TableCell>
+			<Hidden mdDown>
+				<TableCell
+					sx={{
+						whiteSpace: 'nowrap',
+						overflow: 'hidden',
+						textOverflow: 'ellipsis',
+					}}
+				>
+					{note.content}
+				</TableCell>
+			</Hidden>
+			<Hidden smDown>
+				<TableCell>{note.updatedAt?.toLocaleDateString()}</TableCell>
+			</Hidden>
 			<TableCell>
 				<Button color="primary" sx={{ padding: 2 }}>
 					Edit
