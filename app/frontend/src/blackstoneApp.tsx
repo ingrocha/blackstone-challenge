@@ -1,5 +1,5 @@
-import { BlackstoneAppRouter } from './router/BlackstoneAppRouter';
-import { BlackstoneAppTheme } from './theme/BlackstoneAppTheme';
+import { BlackstoneAppRouter } from './router/blackstoneAppRouter';
+import { BlackstoneAppTheme } from './theme/blackstoneAppTheme';
 
 export const BlackstoneApp = () => {
 	return (

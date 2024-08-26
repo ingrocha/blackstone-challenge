@@ -12,7 +12,7 @@ import {
 
 import { Note } from '@blackstone-challenge/data-model/entities';
 
-import { TableItemNotesView } from './TableItemNotes.view';
+import { TableItemNotesView } from './tableItemNotes.view';
 
 export const TableListNotesView = ({ notes }: { notes: Note[] }) => {
 	return (

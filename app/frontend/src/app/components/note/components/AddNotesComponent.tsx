@@ -1,5 +1,5 @@
-import { AppLayout } from '../../../layout/AppLayout';
-import { AddNotesView } from '../views/AddNotes.view';
+import { AppLayout } from '../../../layout/appLayout';
+import { AddNotesView } from '../views/addNotes.view';
 
 export const AddNoteComponent = () => {
 	return (

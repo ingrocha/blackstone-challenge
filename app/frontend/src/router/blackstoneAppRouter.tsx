@@ -1,6 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { AuthRoutes } from '../auth/routes/AuthRoutes';
-import { AppRoutes } from '../app/routes/AppRoutes';
+import { AuthRoutes } from '../auth/routes/authRoutes';
+import { AppRoutes } from '../app/routes/appRoutes';
 
 export const BlackstoneAppRouter = () => {
 	return (

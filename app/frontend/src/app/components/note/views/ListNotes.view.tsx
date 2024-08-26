@@ -1,7 +1,7 @@
 import { Note } from '@blackstone-challenge/data-model/entities';
 import { NotesOutlined, SearchOutlined } from '@mui/icons-material';
 import { Button, Grid, TextField } from '@mui/material';
-import { TableListNotesView } from './TableListNotes.view';
+import { TableListNotesView } from './tableListNotes.view';
 
 const mockNotes: Note[] = [
 	{

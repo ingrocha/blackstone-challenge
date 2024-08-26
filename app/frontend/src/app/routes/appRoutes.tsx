@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { NoteRoutes } from '../components/note/routes/NoteRoutes';
+import { NoteRoutes } from '../components/note/routes/noteRoutes';
 
 export const AppRoutes = () => {
 	return (

@@ -1,2 +1,2 @@
-export * from './TopTitle.view';
-export * from './BottomButtons.view';
+export * from './topTitle.view';
+export * from './bottomButtons.view';

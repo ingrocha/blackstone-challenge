@@ -1,6 +1,6 @@
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import { AuthLayout } from '../layout/AuthLayout';
+import { AuthLayout } from '../layout/authLayout';
 
 export const RegisterComponent = () => {
 	return (
