@@ -1,9 +1,10 @@
-import { Typography } from '@mui/material';
+import { AppLayout } from '../../../layout/AppLayout';
+import { AddNotesView } from '../views/AddNotes.view';
 
 export const AddNoteComponent = () => {
 	return (
-		<div>
-			<Typography>Add Note Page</Typography>
-		</div>
+		<AppLayout>
+			<AddNotesView />
+		</AppLayout>
 	);
 };

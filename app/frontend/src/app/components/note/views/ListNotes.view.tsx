@@ -8,7 +8,7 @@ const mockNotes: Note[] = [
 		id: '1',
 		title: 'Test',
 		content:
-			'Tempor occaecat cupidatat laboris mollit exercitation incididunt commodo culpa ex ea enim occaecat. Enim nisi aliqua et deserunt laborum esse. Et velit excepteur enim incididunt amet nostrud. Nostrud commodo non proident officia proident id.',
+			'<h1>Tempor occaecat cupidatat laboris mollit exercitation incididunt commodo culpa ex ea enim occaecat. Enim nisi aliqua et deserunt laborum esse. Et velit excepteur enim incididunt amet nostrud. Nostrud commodo non proident officia proident id.</h1><p><br></p><p>aSasaS</p>',
 		author: '',
 		updatedBy: '',
 		updateHistories: [],
@@ -55,15 +55,7 @@ export const ListNotesView = () => {
 			}}
 		>
 			<Grid container justifyContent="end" sx={{ mb: 7 }}>
-				<Button
-					color="primary"
-					sx={{
-						padding: 2,
-						backgroundColor: 'primary.main',
-						color: 'white',
-						':hover': { backgroundColor: 'primary.main' },
-					}}
-				>
+				<Button color="primary" variant="contained">
 					<NotesOutlined sx={{ fontSize: 30, mb: 1 }} />
 					New Note
 				</Button>
