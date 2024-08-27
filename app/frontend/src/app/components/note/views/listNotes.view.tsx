@@ -2,6 +2,7 @@ import { Note } from '@blackstone-challenge/data-model/entities';
 import { NotesOutlined, SearchOutlined } from '@mui/icons-material';
 import { Button, Grid, TextField } from '@mui/material';
 import { TableListNotesView } from './tableListNotes.view';
+import { TopTitleView } from '../../../shared/views';
 
 const mockNotes: Note[] = [
 	{
@@ -55,6 +56,7 @@ export const ListNotesView = () => {
 			}}
 		>
 			<Grid container justifyContent="end" sx={{ mb: 7 }}>
+				<TopTitleView title="List Notes"></TopTitleView>
 				<Button color="primary" variant="contained">
 					<NotesOutlined sx={{ fontSize: 30, mb: 1 }} />
 					New Note

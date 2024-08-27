@@ -4,4 +4,5 @@ export enum ButtonsActions {
 	DELETE = 'Delete',
 	EDIT = 'Edit',
 	SAVE = 'Save',
+	SEARCH = 'Search',
 }
