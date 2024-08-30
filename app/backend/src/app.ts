@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import routes from './api/index.routes';
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 dotenv.config();
 
@@ -11,6 +12,8 @@ const app: Application = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
 
 app.get('/', (req, res) => {
 	return res.status(200).send({

@@ -5,6 +5,6 @@ services:
         ports:
             - 27017:27017
         environment:
-            MONGODB_DATABASE: ${MONGODB_DATABASE}
+            MONGODB_DATABASE: ${MONGO_DBNAME}
         volumes:
             - ./mongo:/data/db
