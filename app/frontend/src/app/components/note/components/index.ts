@@ -1,2 +1,2 @@
-export * from './addNotesComponent';
-export * from './listNotesComponent';
+export * from './addNotes.component';
+export * from './listNotes.component';
