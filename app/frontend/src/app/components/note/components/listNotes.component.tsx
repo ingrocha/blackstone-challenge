@@ -1,4 +1,4 @@
-import { AppLayout } from '../../../layout/appLayout';
+import { AppLayout } from '../../../layout/app.layout';
 import { ListNotesView } from '../views';
 
 export const ListNoteComponent = () => {
