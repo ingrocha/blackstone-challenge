@@ -12,8 +12,20 @@ import {
 	Toolbar,
 	Typography,
 } from '@mui/material';
+import { SideBarMenuInterface } from '../interfaces';
 
 export const SideBar = ({ drawerWidth }: { drawerWidth: number }) => {
+	const sideBarMenu: SideBarMenuInterface[] = [
+		{
+			title: 'Users',
+			route: 'app/users/list',
+		},
+		{
+			title: 'Notes',
+			route: 'app/notes/list',
+		},
+	];
+
 	return (
 		<Box component="nav" sx={{ width: drawerWidth, flexShrink: { sm: 0 } }}>
 			<Drawer
@@ -34,21 +46,18 @@ export const SideBar = ({ drawerWidth }: { drawerWidth: number }) => {
 				</Toolbar>
 				<Divider />
 				<List>
-					{['Enero', 'Febrero', 'Marzo', 'Abril'].map(
-						(text, index) => (
-							<ListItem key={text} disablePadding>
-								<ListItemButton>
-									<ListItemIcon>
-										<TurnedInNot />
-									</ListItemIcon>
-									<Grid container>
-										<ListItemText primary={text} />
-										<ListItemText secondary="Incididunt laboris esse exercitation enim voluptate id." />
-									</Grid>
-								</ListItemButton>
-							</ListItem>
-						)
-					)}
+					{sideBarMenu.map((menu, index) => (
+						<ListItem key={menu.title} disablePadding>
+							<ListItemButton>
+								<ListItemIcon>
+									<TurnedInNot />
+								</ListItemIcon>
+								<Grid container>
+									<ListItemText primary={menu.title} />
+								</Grid>
+							</ListItemButton>
+						</ListItem>
+					))}
 				</List>
 			</Drawer>
 		</Box>
