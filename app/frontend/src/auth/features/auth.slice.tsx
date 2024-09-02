@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { AuthStateInterface } from '../interfaces';
 import { AuthStatesEnum } from '../../shared/enums';
 
@@ -16,15 +16,14 @@ export const authSlice = createSlice({
 	name: 'auth',
 	initialState,
 	reducers: {
-		login: (
-			state,
-			action: PayloadAction<{ username: string; password: string }>
-		) => {
-			state.status = AuthStatesEnum.LOGGING_IN;
-			state.username = action.payload.username;
-			state.password = action.payload.password;
-			console.log('Logging in...');
-			// handle login logic here
+		readToken: (state) => {
+			if (!state.token || state.token === '') {
+				const token = localStorage.getItem('token');
+				if (token) {
+					state.token = token;
+					state.status = AuthStatesEnum.LOGGED_IN;
+				}
+			}
 		},
 	},
 	extraReducers: (builder) => {
@@ -50,6 +49,6 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { login } = authSlice.actions;
+export const { readToken } = authSlice.actions;
 
 export default authSlice.reducer;
