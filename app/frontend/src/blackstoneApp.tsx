@@ -1,4 +1,4 @@
-import { BlackstoneAppRouter } from './router/blackstoneAppRouter';
+import { BlackstoneAppRouter } from './routes/blackstoneApp.routes';
 import { BlackstoneAppTheme } from './theme/blackstoneAppTheme';
 
 export const BlackstoneApp = () => {

@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { NoteRoutes } from '../components/note/routes/note.routes';
 import { UserRoutes } from '../components/user/routers/user.routes';
 import { DashboardComponent } from '../components/dashboard/components';
@@ -7,7 +7,6 @@ import { ProtectedRoute } from './guard/protectedRoute.guard';
 
 export const AppRoutes = () => {
 	const token = useAppSelector((state) => state.authSlice.token);
-
 	return (
 		<Routes>
 			<Route
@@ -34,8 +33,10 @@ export const AppRoutes = () => {
 					</ProtectedRoute>
 				}
 			/>
-
-			{/* <Route path="/users/*" element={<User />} /> */}
+			<Route
+				path="/*"
+				element={<Navigate to="/app/dashboard"></Navigate>}
+			/>
 		</Routes>
 	);
 };
