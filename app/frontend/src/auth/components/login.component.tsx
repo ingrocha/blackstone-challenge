@@ -1,12 +1,11 @@
 import { Button, Grid, Link, TextField, Typography } from '@mui/material';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { AuthLayout } from '../layout/authLayout';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useAppDispatch } from '../../store';
-import { toast } from 'sonner';
 import { loginUserThunk } from '../features';
 
 const schema = z.object({
@@ -17,6 +16,7 @@ const schema = z.object({
 export type LoginFormFields = z.infer<typeof schema>;
 
 export const LoginComponent = () => {
+	const navigate = useNavigate();
 	const {
 		register,
 		handleSubmit,
@@ -30,7 +30,7 @@ export const LoginComponent = () => {
 
 	const onSubmit: SubmitHandler<LoginFormFields> = async (data) => {
 		const response = await dispatch(loginUserThunk(data));
-		if (response.payload) toast.success('Login successful');
+		if (response.payload) navigate('/app/dashboard');
 	};
 
 	return (

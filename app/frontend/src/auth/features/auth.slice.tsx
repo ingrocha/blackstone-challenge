@@ -37,6 +37,8 @@ export const authSlice = createSlice({
 			} else {
 				state.status = AuthStatesEnum.LOGGED_IN;
 				state.token = action.payload.token;
+				localStorage.setItem('token', action.payload.token);
+				toast.success('User logged in successfully.');
 			}
 		});
 		builder.addCase(loginUserThunk.rejected, (state, action) => {
