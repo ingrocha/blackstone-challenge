@@ -39,5 +39,5 @@ export const checkLogin = async (
 
 	const user = userMapper(userOuputDto);
 
-	return { token: genToken(user) };
+	return { username: user.username, token: genToken(user) };
 };

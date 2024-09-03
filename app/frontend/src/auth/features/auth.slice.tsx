@@ -9,7 +9,6 @@ const initialState: AuthStateInterface = {
 	status: AuthStatesEnum.UNAUTHENTICATED,
 	token: '',
 	username: '',
-	password: '',
 };
 
 export const authSlice = createSlice({
@@ -25,6 +24,12 @@ export const authSlice = createSlice({
 				}
 			}
 		},
+		logout: (state) => {
+			state.status = AuthStatesEnum.UNAUTHENTICATED;
+			state.token = '';
+			state.username = '';
+			localStorage.removeItem('token');
+		},
 	},
 	extraReducers: (builder) => {
 		builder.addCase(loginUserThunk.pending, (state) => {
@@ -36,6 +41,7 @@ export const authSlice = createSlice({
 			} else {
 				state.status = AuthStatesEnum.LOGGED_IN;
 				state.token = action.payload.token;
+				state.username = action.payload.username;
 				localStorage.setItem('token', action.payload.token);
 				toast.success('User logged in successfully.');
 			}
